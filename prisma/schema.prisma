@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
+
+model Store {
+  id           String     @id @default(cuid())
+  name         String
+  address      String
+  phone        String
+  hours        String
+  mapEmbedUrl  String
+  mapLink      String
+  city         String     @default("Cebu City")
+  region       String     @default("Central Visayas")
+  isActive     Boolean    @default(true)
+  sortOrder    Int        @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  feedback     Feedback[]
+}
+
+model MenuItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  category    String
+  sizes       String?
+  imageUrl    String
+  isAvailable Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Feedback {
+  id                 String   @id @default(cuid())
+  branchId           String
+  branch             Store    @relation(fields: [branchId], references: [id])
+  orderType          String
+  foodRating         Int
+  serviceRating      Int
+  cleanlinessRating  Int
+  overallRating      Int
+  orderDetails       String?
+  comments           String?
+  wouldRecommend     Boolean
+  customerName       String?
+  customerPhone      String?
+  customerEmail      String?
+  createdAt          DateTime @default(now())
+}

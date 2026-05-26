@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+:root {
+  /* Semantic tokens mapped to logo palette */
+  --background: #f7f5ed; /* pearl-beige 50 */
+  --foreground: #14140f; /* dry-sage 950 */
+  --cream: #f0ebdb; /* pearl-beige 100 */
+  --gold: #d6b929; /* dark-khaki 500 */
+  --gold-light: #f5ee70; /* banana-cream 300 */
+  --brown: #3a392c; /* dry-sage 800 */
+  --brown-dark: #14140f; /* dry-sage 950 */
+  --brown-light: #907c3c; /* pearl-beige 600 */
+  --charcoal: #14140f; /* dry-sage 950 */
+  --charcoal-light: #747258; /* dry-sage 600 */
+  --accent: #f7e73b; /* bright-lemon 400 — logo yellow */
+  --accent-dark: #c4b408; /* bright-lemon 600 */
+  --surface: #fdfce7; /* bright-lemon 50 */
+  --header-height: 5.75rem;
+}
+
+@theme inline {
+  /* Full palette scales */
+  --color-dark-khaki-50: #fbf8ea;
+  --color-dark-khaki-100: #f7f1d4;
+  --color-dark-khaki-200: #efe3a9;
+  --color-dark-khaki-300: #e7d57e;
+  --color-dark-khaki-400: #dec754;
+  --color-dark-khaki-500: #d6b929;
+  --color-dark-khaki-600: #ab9421;
+  --color-dark-khaki-700: #816f18;
+  --color-dark-khaki-800: #564a10;
+  --color-dark-khaki-900: #2b2508;
+  --color-dark-khaki-950: #1e1a06;
+
+  --color-banana-cream-50: #fdfce7;
+  --color-banana-cream-100: #fcf9cf;
+  --color-banana-cream-200: #f8f4a0;
+  --color-banana-cream-300: #f5ee70;
+  --color-banana-cream-400: #f2e940;
+  --color-banana-cream-500: #eee311;
+  --color-banana-cream-600: #bfb60d;
+  --color-banana-cream-700: #8f880a;
+  --color-banana-cream-800: #5f5b07;
+  --color-banana-cream-900: #302d03;
+  --color-banana-cream-950: #212002;
+
+  --color-dry-sage-50: #f4f4f0;
+  --color-dry-sage-100: #e9e9e2;
+  --color-dry-sage-200: #d3d2c5;
+  --color-dry-sage-300: #bdbca8;
+  --color-dry-sage-400: #a7a58b;
+  --color-dry-sage-500: #918f6e;
+  --color-dry-sage-600: #747258;
+  --color-dry-sage-700: #575642;
+  --color-dry-sage-800: #3a392c;
+  --color-dry-sage-900: #1d1d16;
+  --color-dry-sage-950: #14140f;
+
+  --color-pearl-beige-50: #f7f5ed;
+  --color-pearl-beige-100: #f0ebdb;
+  --color-pearl-beige-200: #e1d7b7;
+  --color-pearl-beige-300: #d2c393;
+  --color-pearl-beige-400: #c3af6f;
+  --color-pearl-beige-500: #b49b4b;
+  --color-pearl-beige-600: #907c3c;
+  --color-pearl-beige-700: #6c5d2d;
+  --color-pearl-beige-800: #483e1e;
+  --color-pearl-beige-900: #241f0f;
+  --color-pearl-beige-950: #19160b;
+
+  --color-bright-lemon-50: #fefce7;
+  --color-bright-lemon-100: #fdf9ce;
+  --color-bright-lemon-200: #fbf39d;
+  --color-bright-lemon-300: #f9ed6c;
+  --color-bright-lemon-400: #f7e73b;
+  --color-bright-lemon-500: #f5e10a;
+  --color-bright-lemon-600: #c4b408;
+  --color-bright-lemon-700: #938706;
+  --color-bright-lemon-800: #625a04;
+  --color-bright-lemon-900: #312d02;
+  --color-bright-lemon-950: #222001;
+
+  --color-logo-red-50: #fef2f2;
+  --color-logo-red-100: #fee2e2;
+  --color-logo-red-200: #fecaca;
+  --color-logo-red-300: #f87171;
+  --color-logo-red-400: #ef4444;
+  --color-logo-red-500: #cc2222;
+  --color-logo-red-600: #b91c1c;
+  --color-logo-red-700: #991b1b;
+  --color-logo-red-800: #7f1d1d;
+  --color-logo-red-900: #611616;
+  --color-logo-red-950: #450a0a;
+
+  /* Semantic aliases (used across components) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-brown: var(--brown);
+  --color-brown-dark: var(--brown-dark);
+  --color-brown-light: var(--brown-light);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-surface: var(--surface);
+
+  --font-sans: var(--font-mulish);
+  --font-display: var(--font-prompt);
+  --font-subtitle: var(--font-fira-condensed);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mulish), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-prompt), system-ui, sans-serif;
+}
+
+.font-subtitle {
+  font-family: var(--font-fira-condensed), system-ui, sans-serif;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 18s ease-out forwards;
+}
+
+.animate-on-scroll-up,
+.animate-on-scroll-down,
+.animate-on-scroll-left,
+.animate-on-scroll-right,
+.animate-on-scroll-scale {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-on-scroll-up {
+  transform: translateY(32px);
+}
+
+.animate-on-scroll-down {
+  transform: translateY(-32px);
+}
+
+.animate-on-scroll-left {
+  transform: translateX(-32px);
+}
+
+.animate-on-scroll-right {
+  transform: translateX(32px);
+}
+
+.animate-on-scroll-scale {
+  transform: scale(0.94);
+}
+
+.animate-on-scroll-up.is-visible,
+.animate-on-scroll-down.is-visible,
+.animate-on-scroll-left.is-visible,
+.animate-on-scroll-right.is-visible,
+.animate-on-scroll-scale.is-visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--accent) 50%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* === Maroon / deep-red palette for hero === */
+@theme inline {
+  --color-maroon-50: #fdf2f2;
+  --color-maroon-100: #f5d0d0;
+  --color-maroon-200: #e8a3a3;
+  --color-maroon-300: #d47070;
+  --color-maroon-400: #b94040;
+  --color-maroon-500: #8b1a1a;
+  --color-maroon-600: #6e1010;
+  --color-maroon-700: #560c0c;
+  --color-maroon-800: #3a0000;
+  --color-maroon-900: #2a0000;
+  --color-maroon-950: #1a0000;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d4a843 0%, #f7e73b 40%, #d6b929 70%, #c4a020 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-hero-yellow {
+  color: #f7e73b;
+  text-shadow: 0 2px 24px rgba(247, 231, 59, 0.35);
+}
+
+/* Ember particle animation */
+@keyframes ember-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) scale(0);
+  }
+}
+
+.animate-ember {
+  animation: ember-rise var(--duration, 6s) ease-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Smoke drift */
+@keyframes smoke-drift {
+  0% {
+    opacity: 0.03;
+    transform: translateX(-10%) scaleX(1);
+  }
+  50% {
+    opacity: 0.08;
+    transform: translateX(5%) scaleX(1.1);
+  }
+  100% {
+    opacity: 0.03;
+    transform: translateX(-10%) scaleX(1);
+  }
+}
+
+.animate-smoke {
+  animation: smoke-drift 12s ease-in-out infinite;
+}
+
+/* Warm glow pulse */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+
+/* Navbar underline slide */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #d6b929, #f7e73b);
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1), left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-underline:hover::after,
+.nav-underline.active::after {
+  width: 100%;
+  left: 0;
+}

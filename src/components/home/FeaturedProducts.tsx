@@ -18,7 +18,7 @@ interface MenuItem {
 
 export function FeaturedProducts({ items }: { items: MenuItem[] }) {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-12 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll className="text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-dark-khaki-600">
@@ -33,7 +33,7 @@ export function FeaturedProducts({ items }: { items: MenuItem[] }) {
           </p>
         </AnimateOnScroll>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, index) => (
             <AnimateOnScroll key={item.id} delay={index * 100} direction="scale">
               <Card hover className="group h-full overflow-hidden">

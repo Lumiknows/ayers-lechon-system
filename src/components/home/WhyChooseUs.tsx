@@ -5,7 +5,7 @@ import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 export function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-bright-lemon-50 via-banana-cream-50 to-bright-lemon-100 py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-bright-lemon-50 via-banana-cream-50 to-bright-lemon-100 py-12 sm:py-24">
       <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-bright-lemon-300/20 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-dark-khaki-300/15 blur-3xl" />
 
@@ -15,7 +15,7 @@ export function WhyChooseUs() {
 
           {/* Big hero tile — image + headline */}
           <AnimateOnScroll direction="left" className="sm:col-span-2 lg:row-span-2">
-            <div className="group relative h-full min-h-[340px] overflow-hidden rounded-3xl sm:min-h-[420px]">
+            <div className="group relative h-full min-h-[260px] overflow-hidden rounded-3xl sm:min-h-[420px]">
               <Image
                 src="/hero-lechon-belly.jpg"
                 alt="Crispy lechon belly close-up"
@@ -43,7 +43,7 @@ export function WhyChooseUs() {
 
           {/* Tile — Authentic roasting */}
           <AnimateOnScroll delay={100} direction="right">
-            <div className="group relative flex h-full min-h-[200px] flex-col justify-end overflow-hidden rounded-3xl bg-logo-red-600 p-6">
+            <div className="group relative flex h-full min-h-[160px] flex-col justify-end overflow-hidden rounded-3xl bg-logo-red-600 p-5 sm:min-h-[200px] sm:p-6">
               <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10 blur-2xl transition-all group-hover:scale-150" />
               <div className="pointer-events-none absolute right-4 top-4">
                 <svg viewBox="0 0 64 64" className="h-16 w-16 text-white/10" fill="currentColor">
@@ -65,7 +65,7 @@ export function WhyChooseUs() {
 
           {/* Tile — Stats + image */}
           <AnimateOnScroll delay={200} direction="right">
-            <div className="group relative flex h-full min-h-[200px] flex-col overflow-hidden rounded-3xl">
+            <div className="group relative flex h-full min-h-[160px] flex-col overflow-hidden rounded-3xl sm:min-h-[200px]">
               <Image
                 src="/hero-lechon-whole.jpg"
                 alt="Whole lechon roast"
@@ -94,39 +94,39 @@ export function WhyChooseUs() {
         </div>
 
         {/* Bottom row — three small tiles */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        <div className="mt-3 grid gap-3 sm:mt-4 sm:gap-4 sm:grid-cols-3">
           <AnimateOnScroll delay={80} direction="up">
-            <div className="group flex items-center gap-4 rounded-3xl border border-white/60 bg-white/50 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-logo-red-600 transition-transform duration-300 group-hover:scale-110">
-                <Beef className="h-7 w-7 text-white" />
+            <div className="group flex items-center gap-3 rounded-2xl border border-white/60 bg-white/50 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg sm:gap-4 sm:rounded-3xl sm:p-5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-logo-red-600 transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14 sm:rounded-2xl">
+                <Beef className="h-5 w-5 text-white sm:h-7 sm:w-7" />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-charcoal">Premium Pork</h3>
-                <p className="mt-0.5 text-sm text-charcoal-light">Hand-selected, locally sourced from trusted Cebu farms.</p>
+                <h3 className="font-display text-sm font-bold text-charcoal sm:text-base">Premium Pork</h3>
+                <p className="mt-0.5 text-xs text-charcoal-light sm:text-sm">Hand-selected, locally sourced from trusted Cebu farms.</p>
               </div>
             </div>
           </AnimateOnScroll>
 
           <AnimateOnScroll delay={160} direction="up">
-            <div className="group flex items-center gap-4 rounded-3xl border border-white/60 bg-white/50 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-dark-khaki-500 transition-transform duration-300 group-hover:scale-110">
-                <Truck className="h-7 w-7 text-white" />
+            <div className="group flex items-center gap-3 rounded-2xl border border-white/60 bg-white/50 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg sm:gap-4 sm:rounded-3xl sm:p-5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-dark-khaki-500 transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14 sm:rounded-2xl">
+                <Truck className="h-5 w-5 text-white sm:h-7 sm:w-7" />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-charcoal">Free Delivery</h3>
-                <p className="mt-0.5 text-sm text-charcoal-light">Door-to-door within Metro Cebu, nationwide via airport.</p>
+                <h3 className="font-display text-sm font-bold text-charcoal sm:text-base">Free Delivery</h3>
+                <p className="mt-0.5 text-xs text-charcoal-light sm:text-sm">Door-to-door within Metro Cebu, nationwide via airport.</p>
               </div>
             </div>
           </AnimateOnScroll>
 
           <AnimateOnScroll delay={240} direction="up">
-            <div className="group flex items-center gap-4 rounded-3xl border border-white/60 bg-white/50 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-logo-red-600 transition-transform duration-300 group-hover:scale-110">
-                <PartyPopper className="h-7 w-7 text-white" />
+            <div className="group flex items-center gap-3 rounded-2xl border border-white/60 bg-white/50 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg sm:gap-4 sm:rounded-3xl sm:p-5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-logo-red-600 transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14 sm:rounded-2xl">
+                <PartyPopper className="h-5 w-5 text-white sm:h-7 sm:w-7" />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-charcoal">Event Catering</h3>
-                <p className="mt-0.5 text-sm text-charcoal-light">Birthdays, weddings, fiestas — we handle it all.</p>
+                <h3 className="font-display text-sm font-bold text-charcoal sm:text-base">Event Catering</h3>
+                <p className="mt-0.5 text-xs text-charcoal-light sm:text-sm">Birthdays, weddings, fiestas — we handle it all.</p>
               </div>
             </div>
           </AnimateOnScroll>

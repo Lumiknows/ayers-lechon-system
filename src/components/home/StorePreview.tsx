@@ -14,7 +14,7 @@ interface Store {
 
 export function StorePreview({ stores }: { stores: Store[] }) {
   return (
-    <section className="relative overflow-hidden bg-dry-sage-800 py-16 text-white sm:py-24">
+    <section className="relative overflow-hidden bg-dry-sage-800 py-12 text-white sm:py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(214,185,41,0.1),transparent_50%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll className="text-center">
@@ -29,7 +29,7 @@ export function StorePreview({ stores }: { stores: Store[] }) {
           </p>
         </AnimateOnScroll>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-3 sm:mt-12 sm:gap-6 md:grid-cols-2">
           {stores.map((store, index) => (
             <AnimateOnScroll key={store.id} delay={index * 120} direction="up">
               <Card className="h-full bg-white/10 ring-white/10 backdrop-blur transition-transform duration-300 hover:-translate-y-1">

@@ -16,7 +16,7 @@ export function TestimonialsPreview({
   testimonials: Testimonial[];
 }) {
   return (
-    <section className="relative overflow-hidden bg-pearl-beige-100 py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-pearl-beige-100 py-12 sm:py-24">
       <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-dark-khaki-200/30 blur-3xl" />
       <div className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-pearl-beige-300/40 blur-3xl" />
 
@@ -35,7 +35,7 @@ export function TestimonialsPreview({
           </Button>
         </AnimateOnScroll>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
           {testimonials.map((item, index) => (
             <AnimateOnScroll key={item.id} delay={index * 120} direction="up">
               <div className="group relative h-full rounded-2xl border border-pearl-beige-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">

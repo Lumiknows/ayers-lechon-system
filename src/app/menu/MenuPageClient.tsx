@@ -41,7 +41,7 @@ export default function MenuPageClient({ items }: { items: MenuItem[] }) {
               Cebu Lechon Menu
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-white/75">
-              Kinutchillo half lechon, boneless belly, and whole lechon regular —
+              Kinutchillo half lechon, boneless belly, and whole lechon regular.
               roasted fresh for your next Cebu celebration.
             </p>
           </AnimateOnScroll>

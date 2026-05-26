@@ -34,7 +34,7 @@ export function WhyChooseUs() {
                   <span className="text-bright-lemon-400">Difference</span>
                 </h2>
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-white/70 sm:text-base">
-                  Every lechon we serve carries a tradition of Cebuano craftsmanship — hand-picked, 
+                  Every lechon we serve carries a tradition of Cebuano craftsmanship: hand-picked, 
                   slow-roasted, and delivered crispy to your table.
                 </p>
               </div>
@@ -126,7 +126,7 @@ export function WhyChooseUs() {
               </div>
               <div>
                 <h3 className="font-display text-sm font-bold text-charcoal sm:text-base">Event Catering</h3>
-                <p className="mt-0.5 text-xs text-charcoal-light sm:text-sm">Birthdays, weddings, fiestas — we handle it all.</p>
+                <p className="mt-0.5 text-xs text-charcoal-light sm:text-sm">Birthdays, weddings, fiestas. We handle it all.</p>
               </div>
             </div>
           </AnimateOnScroll>

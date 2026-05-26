@@ -32,7 +32,7 @@ export default async function FeedbackPage() {
             Customer Feedback
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
-            Tell us about your experience — it takes less than a minute and helps
+            Tell us about your experience. It takes less than a minute and helps
             us serve you better.
           </p>
         </div>

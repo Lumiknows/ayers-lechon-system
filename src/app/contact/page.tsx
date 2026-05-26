@@ -109,7 +109,7 @@ export default function ContactPage() {
                     Visit Our Branches
                   </h3>
                   <p className="mt-2 text-sm text-charcoal-light">
-                    8 locations across Cebu — find the one nearest you.
+                    8 locations across Cebu. Find the one nearest you.
                   </p>
                   <Button href="/locations" variant="outline" className="mt-4">
                     View All Locations

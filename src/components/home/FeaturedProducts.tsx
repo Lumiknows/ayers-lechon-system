@@ -28,7 +28,7 @@ export function FeaturedProducts({ items }: { items: MenuItem[] }) {
             Featured Products
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-charcoal-light">
-            From Kinutchillo half lechon to whole lechon regular — discover our
+            From Kinutchillo half lechon to whole lechon regular, discover our
             most ordered Cebu specialties.
           </p>
         </AnimateOnScroll>

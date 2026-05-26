@@ -27,7 +27,7 @@ export default async function LocationsPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-white/75">
             Visit us in Cebu City today. Our structure is ready for nationwide
-            expansion — more branches coming soon.
+            expansion, with more branches coming soon.
           </p>
         </div>
       </section>

@@ -50,7 +50,7 @@ export function HeroSection() {
             className="mt-4 max-w-md text-sm leading-relaxed text-white/85 sm:mt-6 sm:text-lg"
           >
             Crispy golden skin, tender flavorful meat, and the rich tradition of
-            Cebu roasting — now available at all Ayer&apos;s Lechon branches.
+            Cebu roasting, now available at all Ayer&apos;s Lechon branches.
             Get them while they&apos;re hot.
           </motion.p>
 

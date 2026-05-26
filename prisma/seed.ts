@@ -16,7 +16,7 @@ const prisma = new PrismaClient({ adapter });
 
 const stores = [
   {
-    name: "Main Branch — Gate 777, Banilad",
+    name: "Main Branch - Gate 777, Banilad",
     address: "Gate 777, across Cebu Country Club, Banilad Road, Apas, Cebu City",
     phone: "(032) 268-0327",
     hours: "Daily: 8:00 AM – 6:00 PM",
@@ -26,7 +26,7 @@ const stores = [
     sortOrder: 1,
   },
   {
-    name: "IT Park Branch — Asiatown, Lahug",
+    name: "IT Park Branch - Asiatown, Lahug",
     address: "2nd Floor, i2 Building, Asia Town, IT Park, Lahug, Cebu City",
     phone: "(032) 231-7615",
     hours: "Open 24/7",
@@ -66,7 +66,7 @@ const stores = [
     sortOrder: 5,
   },
   {
-    name: "Gaisano South — Colon Branch",
+    name: "Gaisano South - Colon Branch",
     address: "Gaisano South, Colon Street, Cebu City",
     phone: "0949-503-2206",
     hours: "Daily: 9:00 AM – 8:00 PM",
@@ -76,7 +76,7 @@ const stores = [
     sortOrder: 6,
   },
   {
-    name: "Mak's View — Busay Branch",
+    name: "Mak's View - Busay Branch",
     address: "Mak's View, Busay, Cebu City",
     phone: "0927-440-6891",
     hours: "Daily: 10:00 AM – 10:00 PM",
@@ -143,7 +143,7 @@ async function main() {
       cleanlinessRating: 5,
       overallRating: 4,
       orderDetails: "Lechon Rice Meal x3",
-      comments: "IT Park branch is so convenient — open 24/7!",
+      comments: "IT Park branch is so convenient, open 24/7!",
       wouldRecommend: true,
     },
     {
@@ -178,7 +178,7 @@ async function main() {
       cleanlinessRating: 4,
       overallRating: 4,
       orderDetails: "Kinutchillo half lechon",
-      comments: "Mango Square branch is always packed — great lechon!",
+      comments: "Mango Square branch is always packed, great lechon!",
       wouldRecommend: true,
       customerName: "Ana R.",
     },

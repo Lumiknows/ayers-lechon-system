@@ -57,7 +57,7 @@ export const BASE_MENU_ITEMS = [
   },
   {
     name: "Kinutchillo SULIT",
-    description: "Generous half lechon — best value for bigger groups without ordering a whole pig.",
+    description: "Generous half lechon, best value for bigger groups without ordering a whole pig.",
     price: 6250,
     category: "KINUTSON",
     sizes: "Half · 18–20 persons · Freight ₱700",
@@ -66,7 +66,7 @@ export const BASE_MENU_ITEMS = [
   },
   {
     name: "Regular Belly Lechon",
-    description: "Boneless belly lechon with golden crackling skin — a Cebu favorite for sharing.",
+    description: "Boneless belly lechon with golden crackling skin. A Cebu favorite for sharing.",
     price: 3610,
     category: "BONELESS_BELLY",
     sizes: "15–20 persons · Freight ₱700",
@@ -75,7 +75,7 @@ export const BASE_MENU_ITEMS = [
   },
   {
     name: "Spicy Belly Lechon",
-    description: "Boneless belly lechon with a bold spicy kick — same crispy perfection, extra heat.",
+    description: "Boneless belly lechon with a bold spicy kick. Same crispy perfection, extra heat.",
     price: 3810,
     category: "BONELESS_BELLY",
     sizes: "15–20 persons · Freight ₱700",
@@ -83,8 +83,8 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 5,
   },
   {
-    name: "Lechon Regular — De Leche",
-    description: "Whole lechon (de leche size) — the star of every Cebu fiesta and family reunion.",
+    name: "Lechon Regular - De Leche",
+    description: "Whole lechon (de leche size), the star of every Cebu fiesta and family reunion.",
     price: 9000,
     category: "LECHON_REGULAR",
     sizes: "11–12 kls · 20–30 persons · +₱150 for spicy",
@@ -92,7 +92,7 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 6,
   },
   {
-    name: "Lechon Regular — Size A",
+    name: "Lechon Regular - Size A",
     description: "Whole lechon roasted to perfection for medium-large celebrations.",
     price: 9500,
     category: "LECHON_REGULAR",
@@ -101,7 +101,7 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 7,
   },
   {
-    name: "Lechon Regular — Size B",
+    name: "Lechon Regular - Size B",
     description: "A crowd-favorite whole lechon for birthdays, baptisms, and office parties.",
     price: 10500,
     category: "LECHON_REGULAR",
@@ -110,7 +110,7 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 8,
   },
   {
-    name: "Lechon Regular — Size C",
+    name: "Lechon Regular - Size C",
     description: "Generous whole lechon for large gatherings and community feasts.",
     price: 11500,
     category: "LECHON_REGULAR",
@@ -119,7 +119,7 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 9,
   },
   {
-    name: "Lechon Regular — Size D",
+    name: "Lechon Regular - Size D",
     description: "Premium whole lechon for grand celebrations and corporate events.",
     price: 12140,
     category: "LECHON_REGULAR",
@@ -128,7 +128,7 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 10,
   },
   {
-    name: "Lechon Regular — Size E",
+    name: "Lechon Regular - Size E",
     description: "Extra-large whole lechon for major fiestas and milestone celebrations.",
     price: 12364,
     category: "LECHON_REGULAR",
@@ -137,8 +137,8 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 11,
   },
   {
-    name: "Lechon Regular — Size F",
-    description: "One of our largest whole lechon sizes — built for big Cebu celebrations.",
+    name: "Lechon Regular - Size F",
+    description: "One of our largest whole lechon sizes, built for big Cebu celebrations.",
     price: 12700,
     category: "LECHON_REGULAR",
     sizes: "28–30 kls · 66–75 persons · +₱150 for spicy",
@@ -146,8 +146,8 @@ export const BASE_MENU_ITEMS = [
     sortOrder: 12,
   },
   {
-    name: "Lechon Regular — Size G",
-    description: "Our biggest whole lechon — the ultimate centerpiece for grand occasions.",
+    name: "Lechon Regular - Size G",
+    description: "Our biggest whole lechon, the ultimate centerpiece for grand occasions.",
     price: 14000,
     category: "LECHON_REGULAR",
     sizes: "31–35 kls · 76–90 persons · +₱150 for spicy",

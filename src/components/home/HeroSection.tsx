@@ -83,9 +83,13 @@ export function HeroSection() {
         <div className="relative mx-auto h-[260px] w-full max-w-lg sm:h-[400px] lg:mx-0 lg:h-[520px] lg:max-w-none">
           {/* Decorative badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -12 }}
-            animate={{ opacity: 1, scale: 1, rotate: -12 }}
-            transition={{ delay: 0.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, rotate: 360 }}
+            transition={{
+              opacity: { delay: 0.7, duration: 0.8 },
+              scale: { delay: 0.7, duration: 0.8 },
+              rotate: { duration: 12, repeat: Infinity, ease: "linear" },
+            }}
             className="absolute bottom-8 right-0 z-20 hidden h-28 w-28 items-center justify-center rounded-full border-4 border-white/20 bg-maroon-950 shadow-2xl sm:flex lg:bottom-12 lg:right-4"
           >
             <p className="text-center font-subtitle text-[9px] font-bold uppercase leading-tight tracking-wider text-bright-lemon-400">

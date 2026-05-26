@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
+import { createClient } from "@supabase/supabase-js";
 import { requireSession } from "@/lib/auth";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+function getSupabaseStorage() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !serviceKey) {
+    throw new Error("Supabase storage not configured");
+  }
+
+  return createClient(url, serviceKey);
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,27 +40,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const supabase = getSupabaseStorage();
+
+    const ext = file.name.split(".").pop() ?? "jpg";
+    const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const path = `menu/${filename}`;
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            folder: "ayers-lechon/menu",
-            transformation: [
-              { width: 800, height: 600, crop: "limit", quality: "auto", format: "auto" },
-            ],
-          },
-          (error, result) => {
-            if (error || !result) reject(error ?? new Error("Upload failed"));
-            else resolve(result);
-          }
-        )
-        .end(buffer);
-    });
+    const { error } = await supabase.storage
+      .from("images")
+      .upload(path, buffer, {
+        contentType: file.type,
+        cacheControl: "31536000",
+      });
 
-    return NextResponse.json({ url: result.secure_url });
+    if (error) {
+      return NextResponse.json({ error: "Upload failed: " + error.message }, { status: 500 });
+    }
+
+    const { data: urlData } = supabase.storage
+      .from("images")
+      .getPublicUrl(path);
+
+    return NextResponse.json({ url: urlData.publicUrl });
   } catch (error) {
     const message = error instanceof Error && error.message === "Unauthorized"
       ? "Unauthorized"

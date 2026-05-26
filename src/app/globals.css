@@ -15,7 +15,7 @@
   --accent: #f7e73b; /* bright-lemon 400 — logo yellow */
   --accent-dark: #c4b408; /* bright-lemon 600 */
   --surface: #fdfce7; /* bright-lemon 50 */
-  --header-height: 5.75rem;
+  --header-height: 4rem;
 }
 
 @theme inline {

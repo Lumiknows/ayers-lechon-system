@@ -20,7 +20,7 @@ export function MenuCard({ item }: { item: MenuItem }) {
       hover
       className="group h-full overflow-hidden transition-shadow duration-500 hover:shadow-xl hover:ring-dark-khaki-200/50"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[3/2] overflow-hidden sm:aspect-[4/3]">
         <Image
           src={item.imageUrl}
           alt={item.name}
@@ -37,22 +37,22 @@ export function MenuCard({ item }: { item: MenuItem }) {
           </div>
         )}
       </div>
-      <CardContent>
-        <Badge variant="gold" className="mb-3">
+      <CardContent className="p-4 sm:p-5">
+        <Badge variant="gold" className="mb-2">
           {getCategoryLabel(item.category)}
         </Badge>
-        <h3 className="font-display text-xl font-semibold text-charcoal transition-colors group-hover:text-dry-sage-800">
+        <h3 className="font-display text-base font-semibold text-charcoal transition-colors group-hover:text-dry-sage-800 sm:text-xl">
           {item.name}
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-charcoal-light">
+        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-charcoal-light sm:mt-2 sm:text-sm">
           {item.description}
         </p>
         {item.sizes && (
-          <p className="mt-2 rounded-lg bg-pearl-beige-100 px-3 py-2 text-xs font-medium text-dry-sage-700">
+          <p className="mt-1.5 rounded-lg bg-pearl-beige-100 px-2.5 py-1.5 text-[11px] font-medium text-dry-sage-700 sm:mt-2 sm:px-3 sm:py-2 sm:text-xs">
             {item.sizes}
           </p>
         )}
-        <p className="mt-4 text-2xl font-bold text-dark-khaki-700">
+        <p className="mt-3 text-xl font-bold text-dark-khaki-700 sm:mt-4 sm:text-2xl">
           {formatPrice(item.price)}
         </p>
       </CardContent>

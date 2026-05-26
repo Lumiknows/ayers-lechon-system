@@ -33,7 +33,7 @@ export function FeaturedProducts({ items }: { items: MenuItem[] }) {
           </p>
         </AnimateOnScroll>
 
-        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {items.map((item, index) => (
             <AnimateOnScroll key={item.id} delay={index * 100} direction="scale">
               <Card hover className="group h-full overflow-hidden">
@@ -43,24 +43,24 @@ export function FeaturedProducts({ items }: { items: MenuItem[] }) {
                     alt={item.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                   />
                 </div>
-                <CardContent>
-                  <Badge variant="gold" className="mb-3">
+                <CardContent className="p-3 sm:p-5">
+                  <Badge variant="gold" className="mb-1.5 sm:mb-3">
                     {getCategoryLabel(item.category)}
                   </Badge>
-                  <h3 className="font-display text-xl font-semibold text-charcoal">
+                  <h3 className="font-display text-sm font-semibold text-charcoal sm:text-xl">
                     {item.name}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-charcoal-light">
+                  <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-charcoal-light sm:mt-2 sm:text-sm">
                     {item.description}
                   </p>
                   {item.sizes && (
-                    <p className="mt-2 text-xs text-dry-sage-600">{item.sizes}</p>
+                    <p className="mt-1 hidden text-xs text-dry-sage-600 sm:block">{item.sizes}</p>
                   )}
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-lg font-bold text-dark-khaki-700">
+                  <div className="mt-2 flex items-center justify-between sm:mt-4">
+                    <span className="text-sm font-bold text-dark-khaki-700 sm:text-lg">
                       {formatPrice(item.price)}
                     </span>
                   </div>

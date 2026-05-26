@@ -22,11 +22,11 @@ export function HeroSection() {
   const { lechonBelly, wholeLechon, friedChicken } = BRAND.heroProducts;
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-logo-red-600">
+    <section className="relative overflow-hidden bg-logo-red-600 lg:min-h-[100svh]">
       <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-bright-lemon-400/10 blur-[100px]" />
       <div className="pointer-events-none absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-maroon-950/20 blur-[80px]" />
 
-      <div className="relative mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-4 px-4 pb-6 pt-[var(--header-height)] sm:gap-8 sm:px-8 lg:grid-cols-2 lg:gap-6 lg:pb-12">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-4 px-4 pb-10 pt-[calc(var(--header-height)+1.5rem)] sm:gap-8 sm:px-8 sm:pb-16 sm:pt-[calc(var(--header-height)+3rem)] lg:min-h-[100svh] lg:grid-cols-2 lg:gap-6 lg:pb-12 lg:pt-[var(--header-height)]">
         {/* Left — headline & CTA */}
         <div className="text-left">
           <motion.p
@@ -55,20 +55,24 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div {...fadeUp(0.45)} className="mt-5 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 rounded-md bg-bright-lemon-400 px-5 py-3 font-subtitle text-xs font-black uppercase tracking-[0.12em] text-maroon-950 shadow-[0_8px_30px_rgba(247,231,59,0.35)] transition-all duration-300 hover:scale-105 hover:bg-bright-lemon-300 hover:shadow-[0_12px_40px_rgba(247,231,59,0.5)] sm:gap-2.5 sm:px-8 sm:py-4 sm:text-sm"
-            >
-              <ShoppingBag className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              Order Now
-            </Link>
-            <Link
-              href="/menu"
-              className="group inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/10 px-5 py-3 font-subtitle text-xs font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/20 sm:gap-2.5 sm:px-8 sm:py-4 sm:text-sm"
-            >
-              <Utensils className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              View Menu
-            </Link>
+            <motion.div whileHover={{ scale: 1.05, rotate: -1 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 rounded-md bg-bright-lemon-400 px-5 py-3 font-subtitle text-xs font-black uppercase tracking-[0.12em] text-maroon-950 shadow-[0_8px_30px_rgba(247,231,59,0.35)] transition-all duration-300 hover:bg-bright-lemon-300 hover:shadow-[0_12px_40px_rgba(247,231,59,0.5)] sm:gap-2.5 sm:px-8 sm:py-4 sm:text-sm"
+              >
+                <ShoppingBag className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-rotate-12 sm:h-4 sm:w-4" />
+                Order Now
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, rotate: 1 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/menu"
+                className="group inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/10 px-5 py-3 font-subtitle text-xs font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/20 sm:gap-2.5 sm:px-8 sm:py-4 sm:text-sm"
+              >
+                <Utensils className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12 sm:h-4 sm:w-4" />
+                View Menu
+              </Link>
+            </motion.div>
           </motion.div>
 
           <motion.p
@@ -79,8 +83,8 @@ export function HeroSection() {
           </motion.p>
         </div>
 
-        {/* Right — floating product mockups */}
-        <div className="relative mx-auto h-[260px] w-full max-w-lg sm:h-[400px] lg:mx-0 lg:h-[520px] lg:max-w-none">
+        {/* Right — floating product mockups (hidden on mobile) */}
+        <div className="relative mx-auto hidden w-full max-w-lg sm:block sm:h-[400px] lg:mx-0 lg:h-[520px] lg:max-w-none">
           {/* Decorative badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

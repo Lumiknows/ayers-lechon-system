@@ -88,7 +88,11 @@ export async function GET(request: NextRequest) {
       branchStats,
       monthlyTrend: monthlyTrendData,
     });
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to fetch stats";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

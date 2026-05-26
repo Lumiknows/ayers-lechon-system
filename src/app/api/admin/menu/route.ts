@@ -9,7 +9,11 @@ export async function GET() {
       orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
     });
     return NextResponse.json(items);
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to fetch menu items";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

@@ -29,8 +29,12 @@ export async function GET(request: NextRequest) {
         "Content-Disposition": `attachment; filename="feedback-qr${branchId ? `-${branchId}` : ""}.png"`,
       },
     });
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to generate QR code";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 
@@ -54,7 +58,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ url, dataUrl });
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to generate QR code";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

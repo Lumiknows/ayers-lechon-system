@@ -3,17 +3,25 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/db";
 import { createSessionToken } from "@/lib/auth";
 import { AUTH_COOKIE } from "@/lib/constants";
+import { loginSchema } from "@/lib/validations";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const rateLimitResult = await rateLimit(request, "auth", 5, "60s");
+    if (rateLimitResult) return rateLimitResult;
 
-    if (!email || !password) {
+    const body = await request.json();
+    const parsed = loginSchema.safeParse(body);
+
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: "Email and password are required" },
+        { error: "Invalid input", details: parsed.error.flatten().fieldErrors },
         { status: 400 }
       );
     }
+
+    const { email, password } = parsed.data;
 
     const admin = await prisma.admin.findUnique({ where: { email } });
 

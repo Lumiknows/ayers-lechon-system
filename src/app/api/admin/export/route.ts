@@ -79,7 +79,11 @@ export async function GET(request: NextRequest) {
         "Content-Disposition": `attachment; filename="feedback-export-${Date.now()}.csv"`,
       },
     });
-  } catch {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to export data";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

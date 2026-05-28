@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireSession } from "@/lib/auth";
 import {
   deleteFeedbackWithAudit,
+  getDeleteErrorResponse,
   verifyDeleteConfirmation,
 } from "@/lib/feedback-delete";
 import { getRequestIp, getUserAgent } from "@/lib/request-meta";
@@ -47,11 +48,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, deletedCount });
   } catch (error) {
-    const message =
-      error instanceof Error && error.message === "Unauthorized"
-        ? "Unauthorized"
-        : "Failed to delete feedback";
-    const status = message === "Unauthorized" ? 401 : 500;
+    console.error("[POST /api/admin/feedback/bulk]", error);
+    const { message, status } = getDeleteErrorResponse(error);
     return NextResponse.json({ error: message }, { status });
   }
 }

@@ -38,7 +38,9 @@ export async function sendFeedbackNotification(data: FeedbackNotificationData): 
 
   try {
     await client.emails.send({
-      from: "Ayers Lechon Feedback <notifications@ayerlechon.com>",
+      // Test mode: use onboarding@resend.dev until your domain is verified in Resend.
+      // Then switch to e.g. "Ayers Lechon <notifications@yourdomain.com>"
+      from: "Ayers Lechon Feedback <onboarding@resend.dev>",
       to: adminEmail,
       subject: `New Feedback: ${stars(data.overallRating)} from ${data.branchName}`,
       html: `

@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
+import { toast } from "sonner";
 import { StarRating } from "@/components/ui/StarRating";
 import { Select } from "@/components/ui/Select";
 import { Input } from "@/components/ui/Input";
@@ -17,13 +18,28 @@ interface Store {
   name: string;
 }
 
+const RATING_FIELDS = [
+  { key: "foodRating" as const, label: "Food Quality" },
+  { key: "serviceRating" as const, label: "Service" },
+  { key: "cleanlinessRating" as const, label: "Cleanliness / Store" },
+  { key: "overallRating" as const, label: "Overall Experience" },
+];
+
+function getFirstFieldError(
+  details: Record<string, string[] | undefined>
+): string | null {
+  for (const messages of Object.values(details)) {
+    if (messages?.[0]) return messages[0];
+  }
+  return null;
+}
+
 function FeedbackFormInner({ stores }: { stores: Store[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const preselectedBranch = searchParams.get("branch") ?? "";
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [form, setForm] = useState({
     branchId: preselectedBranch,
     orderType: "DINE_IN",
@@ -46,23 +62,30 @@ function FeedbackFormInner({ stores }: { stores: Store[] }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
 
     if (!form.branchId) {
-      setError("Please select the branch you visited.");
+      toast.error("Please select the branch you visited.");
       return;
     }
-    if (
-      !form.foodRating ||
-      !form.serviceRating ||
-      !form.cleanlinessRating ||
-      !form.overallRating
-    ) {
-      setError("Please rate all categories before submitting.");
+
+    const missingRatings = RATING_FIELDS.filter((f) => !form[f.key]).map(
+      (f) => f.label
+    );
+    if (missingRatings.length > 0) {
+      toast.error(`Please rate: ${missingRatings.join(", ")}`);
       return;
     }
+
     if (form.wouldRecommend === null) {
-      setError("Please let us know if you would recommend us.");
+      toast.error("Please let us know if you would recommend us.");
+      return;
+    }
+
+    if (
+      form.customerEmail &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.customerEmail)
+    ) {
+      toast.error("Please enter a valid email address.");
       return;
     }
 
@@ -74,14 +97,28 @@ function FeedbackFormInner({ stores }: { stores: Store[] }) {
         body: JSON.stringify(form),
       });
 
+      if (res.status === 429) {
+        toast.error(
+          "You've reached the feedback limit for today. Please try again tomorrow."
+        );
+        return;
+      }
+
+      const data = await res.json();
+
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error ?? "Failed to submit feedback");
+        if (res.status === 400 && data.details) {
+          const fieldError = getFirstFieldError(data.details);
+          toast.error(fieldError ?? data.error ?? "Invalid input");
+          return;
+        }
+        toast.error(data.error ?? "Failed to submit feedback");
+        return;
       }
 
       router.push("/feedback/thank-you");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -89,12 +126,6 @@ function FeedbackFormInner({ stores }: { stores: Store[] }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {error && (
-        <div className="rounded-xl border border-logo-red-200 bg-logo-red-50 px-4 py-3 text-sm text-logo-red-700">
-          {error}
-        </div>
-      )}
-
       <Select
         label="Branch Visited *"
         options={storeOptions}

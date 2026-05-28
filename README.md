@@ -7,7 +7,7 @@ A full-stack restaurant website for Cebu's Ayers Lechon, built with Next.js 16 (
 - **Framework**: Next.js 16 (App Router, TypeScript)
 - **Database**: PostgreSQL via Supabase + Prisma 7
 - **Auth**: JWT (jose) with HTTP-only cookies
-- **Image Uploads**: Cloudinary
+- **Image Uploads**: Supabase Storage
 - **Rate Limiting**: Upstash Redis
 - **Email**: Resend
 - **Deployment**: Vercel
@@ -18,9 +18,8 @@ A full-stack restaurant website for Cebu's Ayers Lechon, built with Next.js 16 (
 
 - Node.js 20+
 - A [Supabase](https://supabase.com) project (free tier works)
-- A [Cloudinary](https://cloudinary.com) account (free tier works)
-- (Optional) [Upstash Redis](https://upstash.com) for rate limiting
-- (Optional) [Resend](https://resend.com) for email notifications
+- [Upstash Redis](https://upstash.com) for rate limiting (recommended for production)
+- [Resend](https://resend.com) for feedback email notifications (recommended for production)
 
 ### 1. Supabase Setup
 
@@ -40,6 +39,20 @@ cp .env.example .env
 ```
 
 Fill in all values in `.env`. See `.env.example` for documentation on each variable.
+
+### 2b. Upstash Redis (rate limiting)
+
+1. Sign up at [console.upstash.com](https://console.upstash.com)
+2. **Create Database** (region near your Supabase/Vercel deployment)
+3. Open **REST API** → copy `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` into `.env`
+4. Limits: admin login **5/min per IP**, feedback submit **3 per 24 hours per IP**
+
+### 2c. Resend (feedback emails)
+
+1. Sign up at [resend.com](https://resend.com) and create an API key
+2. Set `RESEND_API_KEY` and `ADMIN_NOTIFICATION_EMAIL` in `.env`
+3. **Test mode** (no custom domain): emails send from `onboarding@resend.dev` and can only go to the email you used to sign up for Resend
+4. **Production**: verify your domain in Resend, then update `from` in `src/lib/email.ts`
 
 ### 3. Install Dependencies
 
@@ -78,7 +91,6 @@ Open [http://localhost:3000](http://localhost:3000).
 | GET | `/api/menu` | List available menu items |
 | GET | `/api/menu/[id]` | Get single menu item |
 | GET | `/api/stores` | List active stores |
-| GET | `/api/feedback?page=1&limit=20` | Paginated feedback list |
 | POST | `/api/feedback` | Submit customer feedback (rate limited) |
 | GET | `/api/health` | Health check with DB status |
 
@@ -96,10 +108,11 @@ Open [http://localhost:3000](http://localhost:3000).
 |--------|------|-------------|
 | GET | `/api/admin/menu` | All menu items (incl. unavailable) |
 | GET | `/api/admin/stores` | All stores (incl. inactive) |
+| GET | `/api/feedback?page=1&limit=20` | Paginated feedback list (admin) |
 | GET | `/api/admin/stats` | Dashboard statistics |
 | GET | `/api/admin/export` | CSV export of feedback |
 | GET/POST | `/api/admin/qr` | Generate QR codes |
-| POST | `/api/admin/upload` | Upload image to Cloudinary |
+| POST | `/api/admin/upload` | Upload image to Supabase Storage |
 | POST | `/api/menu` | Create menu item |
 | PUT | `/api/menu/[id]` | Update menu item |
 | DELETE | `/api/menu/[id]` | Delete menu item |
@@ -109,7 +122,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Security Features
 
-- **Rate Limiting**: Auth (5/min), feedback submissions (3/min) via Upstash Redis
+- **Rate Limiting**: Auth (5/min), feedback submissions (3 per 24h per IP) via Upstash Redis
 - **Input Validation**: All POST/PUT bodies validated with Zod schemas
 - **CORS**: Configurable allowed origins with preflight support
 - **Origin Validation**: State-changing requests verified against allowed origins
@@ -118,16 +131,27 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deployment to Vercel
 
-1. Push to GitHub
-2. Import project in [Vercel](https://vercel.com)
-3. Add all environment variables from `.env.example`
-4. Vercel will auto-detect Next.js and use the correct build settings
-5. After first deploy, run `npm run db:setup` locally (pointed at production DB) to seed data
+1. Push to GitHub (`git push origin main`)
+2. Import **Lumiknows/ayers-lechon-frontend** (or your repo) in [Vercel](https://vercel.com)
+3. **Settings → Environment Variables** — add every variable from `.env.example` for **Production**:
+   - `DATABASE_URL`, `JWT_SECRET`
+   - `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+   - `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
+   - `RESEND_API_KEY`, `ADMIN_NOTIFICATION_EMAIL`
+   - `ALLOWED_ORIGINS` — your live URL, e.g. `https://your-app.vercel.app`
+4. Deploy (auto on push to `main`)
+5. If needed, run `npm run db:setup` locally against production `DATABASE_URL` once
+6. Change default admin password if you used seed credentials
 
 ### Vercel Integrations (Recommended)
 
 - [Upstash Redis](https://vercel.com/integrations/upstash) — auto-configures `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
-- Environment variables are managed in Vercel Dashboard > Settings > Environment Variables
+
+### Verify after deploy
+
+- Submit test feedback → email arrives at `ADMIN_NOTIFICATION_EMAIL`
+- Rapid login attempts → `429 Too many requests` after 5 tries per minute
+- `GET /api/feedback` without admin cookie → `401 Unauthorized`
 
 ## Scripts
 

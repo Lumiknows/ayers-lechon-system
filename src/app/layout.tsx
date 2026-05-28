@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Prompt, Fira_Sans_Condensed, Mulish } from "next/font/google";
+import { AppToaster } from "@/components/ui/AppToaster";
 import "./globals.css";
 
 const prompt = Prompt({
@@ -51,6 +52,7 @@ export default function RootLayout({
       className={`${prompt.variable} ${firaSansCondensed.variable} ${mulish.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-charcoal">
+        <AppToaster />
         {children}
       </body>
     </html>

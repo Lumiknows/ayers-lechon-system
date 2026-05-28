@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { requireSession } from "@/lib/auth";
 import { feedbackSchema } from "@/lib/validations";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendFeedbackNotification } from "@/lib/email";
 
 export async function GET(request: NextRequest) {
   try {
+    await requireSession();
+
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, Number(searchParams.get("page")) || 1);
     const limit = Math.min(100, Math.max(1, Number(searchParams.get("limit")) || 20));
@@ -30,17 +33,18 @@ export async function GET(request: NextRequest) {
         totalPages: Math.ceil(total / limit),
       },
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Failed to fetch feedback" },
-      { status: 500 }
-    );
+  } catch (error) {
+    const message = error instanceof Error && error.message === "Unauthorized"
+      ? "Unauthorized"
+      : "Failed to fetch feedback";
+    const status = message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const rateLimitResult = await rateLimit(request, "feedback", 3, "60s");
+    const rateLimitResult = await rateLimit(request, "feedback", 3, "24h");
     if (rateLimitResult) return rateLimitResult;
 
     const body = await request.json();

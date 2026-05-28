@@ -20,6 +20,18 @@ function getRedis(): Redis | null {
 
 const limiters = new Map<string, Ratelimit>();
 
+let redisMissingWarned = false;
+
+function warnRedisMissing(): void {
+  if (redisMissingWarned) return;
+  redisMissingWarned = true;
+  if (process.env.NODE_ENV === "production") {
+    console.warn(
+      "[RateLimit] UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN is missing — rate limits are disabled."
+    );
+  }
+}
+
 function getLimiter(prefix: string, maxRequests: number, window: Duration): Ratelimit | null {
   const redisClient = getRedis();
   if (!redisClient) return null;
@@ -59,7 +71,10 @@ export async function rateLimit(
   window: Duration
 ): Promise<NextResponse | null> {
   const limiter = getLimiter(prefix, maxRequests, window);
-  if (!limiter) return null; // Redis not configured, allow request
+  if (!limiter) {
+    warnRedisMissing();
+    return null; // Redis not configured, allow request
+  }
 
   const ip = getClientIp(request);
   const { success, limit, remaining, reset } = await limiter.limit(ip);

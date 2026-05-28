@@ -147,6 +147,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - [Upstash Redis](https://vercel.com/integrations/upstash) — auto-configures `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
 
+### Feedback deletion log (required once)
+
+Admin **delete feedback** needs the `FeedbackDeletionLog` table. If you see *"Deletion log table is missing"*, run this **once** in Supabase:
+
+1. [Supabase Dashboard](https://supabase.com/dashboard) → your project → **SQL Editor** → **New query**
+2. Paste the contents of [`scripts/create-feedback-deletion-log.sql`](scripts/create-feedback-deletion-log.sql)
+3. Click **Run** (success: no errors)
+4. Retry delete in **Admin → Dashboard**
+
+Or locally (if `DATABASE_URL` is set): `npm run db:deletion-log`
+
 ### Verify after deploy
 
 - Submit test feedback → email arrives at `ADMIN_NOTIFICATION_EMAIL`

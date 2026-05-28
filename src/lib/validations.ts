@@ -47,3 +47,12 @@ export const storeSchema = z.object({
 });
 
 export const storeUpdateSchema = storeSchema.partial();
+
+export const feedbackDeleteConfirmSchema = z.object({
+  confirmText: z.literal("DELETE"),
+  confirmEmail: z.string().email("Enter your admin email"),
+});
+
+export const feedbackBulkDeleteSchema = feedbackDeleteConfirmSchema.extend({
+  ids: z.array(z.string().min(1)).min(1, "Select at least one feedback entry"),
+});

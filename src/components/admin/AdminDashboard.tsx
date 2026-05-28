@@ -44,7 +44,13 @@ interface Branch {
   name: string;
 }
 
-export function AdminDashboard({ branches }: { branches: Branch[] }) {
+export function AdminDashboard({
+  branches,
+  adminEmail,
+}: {
+  branches: Branch[];
+  adminEmail: string;
+}) {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
@@ -116,7 +122,11 @@ export function AdminDashboard({ branches }: { branches: Branch[] }) {
         <h2 className="mb-4 font-display text-xl font-semibold text-charcoal">
           Recent Feedback
         </h2>
-        <FeedbackTable feedback={data.feedback} />
+        <FeedbackTable
+          feedback={data.feedback}
+          adminEmail={adminEmail}
+          onDeleted={fetchData}
+        />
       </div>
     </div>
   );

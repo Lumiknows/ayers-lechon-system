@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  BarChart3,
   LayoutDashboard,
   LogOut,
   MapPin,
   Menu,
   QrCode,
+  ScrollText,
   X,
 } from "lucide-react";
 import { useState } from "react";
@@ -21,6 +21,7 @@ const navItems = [
   { href: "/admin/menu", label: "Menu", icon: Menu },
   { href: "/admin/stores", label: "Stores", icon: MapPin },
   { href: "/admin/qr", label: "QR Codes", icon: QrCode },
+  { href: "/admin/audit", label: "Deletion Log", icon: ScrollText },
 ];
 
 export function AdminSidebar({ adminName }: { adminName: string }) {

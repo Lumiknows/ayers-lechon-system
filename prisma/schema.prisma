@@ -63,3 +63,19 @@ model Feedback {
   customerEmail      String?
   createdAt          DateTime @default(now())
 }
+
+model FeedbackDeletionLog {
+  id               String   @id @default(cuid())
+  feedbackId       String
+  adminId          String
+  adminEmail       String
+  adminName        String
+  ipAddress        String
+  userAgent        String?
+  feedbackSnapshot Json
+  deletedAt        DateTime @default(now())
+
+  @@index([deletedAt])
+  @@index([adminId])
+  @@index([feedbackId])
+}
